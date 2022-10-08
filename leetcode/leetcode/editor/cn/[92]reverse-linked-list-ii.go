@@ -31,4 +31,16 @@ func reverseN(head *ListNode, n int) *ListNode {
 	return tmp
 }
 
+func reverseN2(a, b *ListNode) *ListNode {
+	var pre *ListNode = nil
+	cur, next := a, a
+	for cur != b {
+		next = cur.Next
+		cur.Next = pre
+		pre = cur
+		cur = next
+	}
+	return pre
+}
+
 //leetcode submit region end(Prohibit modification and deletion)
