@@ -1,7 +1,7 @@
 package cn
 
 //leetcode submit region begin(Prohibit modification and deletion)
-func twoSum(numbers []int, target int) []int {
+func twoSum2(numbers []int, target int) []int {
 	lo, hi := 0, len(numbers)-1
 	for lo < hi {
 		sum := numbers[lo] + numbers[hi]
