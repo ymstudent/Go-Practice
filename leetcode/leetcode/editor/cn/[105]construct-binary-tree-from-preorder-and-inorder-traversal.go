@@ -12,7 +12,7 @@ package cn
 
 var inorderMap map[int]int
 
-func buildTree(preorder []int, inorder []int) *TreeNode {
+func buildTree2(preorder []int, inorder []int) *TreeNode {
 	inorderMap = make(map[int]int)
 	for k, v := range inorder {
 		inorderMap[v] = k
