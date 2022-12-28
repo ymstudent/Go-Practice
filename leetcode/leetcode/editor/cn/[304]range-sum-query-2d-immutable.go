@@ -5,7 +5,7 @@ type NumMatrix struct {
 	preSum [][]int
 }
 
-func Constructor(matrix [][]int) NumMatrix {
+func Constructor3(matrix [][]int) NumMatrix {
 	m, n := len(matrix), len(matrix[0])
 	numMatrix := new(NumMatrix)
 	numMatrix.preSum = make([][]int, m+1)
