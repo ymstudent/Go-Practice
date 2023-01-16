@@ -21,7 +21,7 @@ const NULL = "#"
 type Codec struct {
 }
 
-func Constructor() Codec {
+func Constructor4() Codec {
 	return Codec{}
 }
 
@@ -47,6 +47,7 @@ func serialize(root *TreeNode, s string) string {
 
 // Deserializes your encoded data to tree.
 var nodes []string
+
 func (this *Codec) deserialize(data string) *TreeNode {
 	s := strings.Split(data, SEP)
 	nodes = make([]string, 0, len(s))
