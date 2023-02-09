@@ -35,11 +35,11 @@ func sort(head, tail *ListNode) *ListNode {
 	}
 	mid := slow
 	// 递归排序，并合并
-	return merge(sort(head, mid), sort(mid, tail))
+	return merge2(sort(head, mid), sort(mid, tail))
 }
 
 // 21 合并2个有序链表 easy
-func merge(head1, head2 *ListNode) *ListNode {
+func merge2(head1, head2 *ListNode) *ListNode {
 	dummyHead := &ListNode{}
 	temp, temp1, temp2 := dummyHead, head1, head2
 	for temp1 != nil && temp2 != nil {
@@ -100,7 +100,7 @@ func sortList(head *ListNode) *ListNode {
 			}
 
 			// 3.4 合并两个长度为subLength的有序链表
-			prev.Next = merge(head1, head2)
+			prev.Next = merge2(head1, head2)
 			for prev.Next != nil { // 将prev 移动到 subLength * 2的位置后去
 				prev = prev.Next
 			}
