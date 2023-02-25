@@ -10,12 +10,12 @@ package cn
  */
 // 归并排序
 func sortList2(head *ListNode) *ListNode {
-	return sort(head, nil)
+	return sort2(head, nil)
 }
 
 // 自顶向下的归并排序，空间复杂度 O(log n)，时间复杂度 O(n log n)
 // 可以参考 labuladong 的归并排序详解 ：https://labuladong.github.io/algo/di-yi-zhan-da78c/shou-ba-sh-66994/gui-bing-p-1387f/
-func sort(head, tail *ListNode) *ListNode {
+func sort2(head, tail *ListNode) *ListNode {
 	if head == nil {
 		return head
 	}
@@ -35,7 +35,7 @@ func sort(head, tail *ListNode) *ListNode {
 	}
 	mid := slow
 	// 递归排序，并合并
-	return merge2(sort(head, mid), sort(mid, tail))
+	return merge2(sort2(head, mid), sort2(mid, tail))
 }
 
 // 21 合并2个有序链表 easy

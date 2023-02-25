@@ -5,20 +5,9 @@ import (
 )
 
 //leetcode submit region begin(Prohibit modification and deletion)
-type sortNums []int
 
-func (s sortNums) Len() int {
-	return len(s)
-}
-func (s sortNums) Less(i, j int) bool {
-	return s[i] < s[j]
-}
-func (s sortNums) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-func threeSum(nums []int) [][]int {
-	sort.Sort(sortNums(nums))
+func threeSum3(nums []int) [][]int {
+	sort.Ints(nums)
 	return nSumTarget(nums, 3, 0, 0)
 }
 
