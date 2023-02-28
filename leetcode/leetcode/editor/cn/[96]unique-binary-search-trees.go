@@ -7,7 +7,7 @@ func numTrees(n int) int {
 
 	for i := 2; i <= n; i++ {
 		for j := 1; j <= i; j++ {
-			g[i] += g[j-1]*g[i-j]
+			g[i] += g[j-1] * g[i-j]
 		}
 	}
 
