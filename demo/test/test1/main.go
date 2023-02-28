@@ -17,7 +17,7 @@ func main() {
 	//safeSet()
 	//speak()
 	//nilInterface()
-	setMap()
+	//setMap()
 }
 
 func defer_call() {
@@ -33,7 +33,6 @@ func defer_call() {
 
 	panic("触发异常")
 }
-
 
 type student struct {
 	Name string
@@ -60,7 +59,7 @@ func pase_student() {
 	fmt.Println(m["wang"], m["li"], m["zhou"])
 }
 
-func addOne()  {
+func addOne() {
 	runtime.GOMAXPROCS(1) //cpu1,保证所有goroutine按顺序执行
 	wg := sync.WaitGroup{}
 	wg.Add(20)
@@ -80,11 +79,13 @@ func addOne()  {
 	wg.Wait()
 }
 
-func functionExtend()  {
+func functionExtend() {
 	t := Teacher{}
 	t.ShowA()
 }
+
 type People struct{}
+
 func (p *People) ShowA() {
 	fmt.Println("showA")
 	p.ShowB() //因为这里调用的是people的showB方法，所以只会输出showB，不会被Teacher的showB方法重载
@@ -92,9 +93,11 @@ func (p *People) ShowA() {
 func (p *People) ShowB() {
 	fmt.Println("showB")
 }
+
 type Teacher struct {
 	People
 }
+
 func (t *Teacher) ShowB() {
 	fmt.Println("teacher showB")
 }
@@ -130,22 +133,24 @@ func mapLock() {
 	wg.Add(2)
 	go func() {
 		defer wg.Done()
-		for i := 0; i< 1000; i++ {
+		for i := 0; i < 1000; i++ {
 			ua.Add("Tom", 11)
 		}
 	}()
 	go func() {
 		defer wg.Done()
-		for i := 0; i< 1000; i++ {
+		for i := 0; i < 1000; i++ {
 			fmt.Println(ua.Get("Tom"))
 		}
 	}()
 	wg.Wait()
 }
+
 type UserAges struct {
 	ages map[string]int
 	sync.Mutex
 }
+
 func (ua *UserAges) Add(name string, age int) {
 	ua.Lock()
 	defer ua.Unlock()
@@ -161,26 +166,28 @@ func (ua *UserAges) Get(name string) int {
 	return -1
 }
 
-func safeSet()  {
-	th:=threadSafeSet{
-		s:[]interface{}{1,2},
+func safeSet() {
+	th := threadSafeSet{
+		s: []interface{}{1, 2},
 	}
-	v:=<-th.Iter()
-	fmt.Println(fmt.Sprintf("%s%v","ch",v))
+	v := <-th.Iter()
+	fmt.Println(fmt.Sprintf("%s%v", "ch", v))
 }
+
 type threadSafeSet struct {
 	sync.RWMutex
 	s []interface{}
 }
+
 func (set *threadSafeSet) Iter() <-chan interface{} {
 	ch := make(chan interface{}) // 解除注释看看！
 	//ch := make(chan interface{},len(set.s))
 	go func() {
 		set.RLock()
 
-		for elem,value := range set.s {
+		for elem, value := range set.s {
 			ch <- elem
-			fmt.Printf("Iter:%d, %v\n",elem,value)
+			fmt.Printf("Iter:%d, %v\n", elem, value)
 		}
 
 		close(ch)
@@ -191,7 +198,7 @@ func (set *threadSafeSet) Iter() <-chan interface{} {
 }
 
 //考点：接口实现
-func speak()  {
+func speak() {
 	//指针类型方法集合包含了某接口的所有方法, 则说该类型的指针类型实现了该接口，此时值类型不一定实现了该接口。
 	//值类型方法集合包含了某接口的所有方法, 则说该类型的值类型实现了该接口，此时指针类型一定实现了该接口。
 	//var peo Man = Stduent{}
@@ -199,6 +206,7 @@ func speak()  {
 	think := "bitch"
 	fmt.Println(peo.Speak(think))
 }
+
 type Man interface {
 	Speak(string) string
 }
@@ -213,22 +221,25 @@ func (stu *Stduent) Speak(think string) (talk string) {
 	return
 }
 
-func nilInterface()  {
+func nilInterface() {
 	if live() == nil {
 		fmt.Println("AAAAAAA")
 	} else {
 		fmt.Println("BBBBBBB")
 	}
 }
+
 type People2 interface {
 	Show()
 }
 type Student struct{}
+
 func (stu *Student) Show() {}
 func live() People2 {
 	var stu *Student
 	return stu
 }
+
 /*
 //可以看出iface比eface 中间多了一层itab结构。
 itab 存储_type信息和[]fun方法集，从上面的结构我们就可得出，因为data指向了nil 并不代表interface 是nil， 所以返回值并不为空
@@ -261,9 +272,9 @@ type itab struct {
     inhash int32
     fun    [1]uintptr      //可变大小 方法集合
 }
- */
+*/
 
-func setMap()  {
+/*func setMap()  {
 	//a := make(map[int]string)
 	var a sync.Map
 	var wg sync.WaitGroup
@@ -275,4 +286,4 @@ func setMap()  {
 		}()
 	}
 	wg.Wait()
-}
+}*/

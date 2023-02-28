@@ -6,7 +6,7 @@ type ExamRoom struct {
 	s []int
 }
 
-func Constructor(n int) ExamRoom {
+func Constructor855(n int) ExamRoom {
 	return ExamRoom{n: n, s: []int{}}
 }
 
