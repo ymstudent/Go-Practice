@@ -17,7 +17,7 @@ func initDLinkedNode(key, value int) *DLinkedNode {
 	return &DLinkedNode{key: key, value: value}
 }
 
-func Constructor(capacity int) LRUCache {
+func Constructor146(capacity int) LRUCache {
 	l := LRUCache{
 		cache:    map[int]*DLinkedNode{},
 		head:     initDLinkedNode(0, 0), // 添加头部有哑节点
