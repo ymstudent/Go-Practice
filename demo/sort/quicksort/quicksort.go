@@ -6,13 +6,13 @@ import (
 )
 
 func main() {
-	a := []int{4, 5, 6, 1, 3, 2}
-	//b := quickSort(a)
-	//fmt.Println(b)
+	a := []int{4, 5, 6, 1, 7, 2, 3}
+	b := quickSort(a)
+	fmt.Println(b)
 
-	c := GetK(a, 4)
+	//c := GetK(a, 4)
 	//d := qucikSelect(a, 4)
-	fmt.Println(c)
+	//fmt.Println(c)
 }
 
 // 快速排序，不稳定的原地排序算法，时间复杂度：O(nlogn)，最坏为O(nlogn)
@@ -32,14 +32,19 @@ func quickSortC(a []int, low, high int) []int {
 
 	pivot := a[high] //选定一个分区点，一般为第一个元素或最后一个元素
 	i := low
+	fmt.Println("排序前", a)
 	for j := low; j < high; j++ { //遍历数组与分区点比较，大的放分区点右边小的放分区点左边
 		if a[j] < pivot {
 			a[i], a[j] = a[j], a[i]
 			i++
 		}
+		fmt.Println(a)
 	}
+	fmt.Println("排序中", a)
 
 	a[i], a[high] = a[high], a[i] //将分区点放到中间(这个位置就是分区点最终的位置)
+
+	fmt.Println("排序后", a)
 
 	quickSortC(a, low, i-1)
 	quickSortC(a, i+1, high)

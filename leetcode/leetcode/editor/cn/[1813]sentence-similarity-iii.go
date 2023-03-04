@@ -20,7 +20,7 @@ func areSentencesSimilar(sentence1 string, sentence2 string) bool {
 	return i+j == min(n, m)
 }
 
-func min(n, m int) int {
+func min1813(n, m int) int {
 	if n > m {
 		return m
 	}
